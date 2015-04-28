@@ -1,12 +1,11 @@
 package us.theappacademy.teampotatoinstagram;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
+import us.theappacademy.oauth.view.OAuthActivity;
 
-public class AuthorizeActivity extends Activity {
+public class AuthorizeActivity extends OAuthActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,23 +13,18 @@ public class AuthorizeActivity extends Activity {
         setContentView(R.layout.activity_authorize);
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.authorize, menu);
-        return true;
+    public void setLayoutView() {
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void replaceCurrentFragment(Fragment newFragment, boolean addToStack) {
+
+    }
+
+    @Override
+    protected Fragment createFragment() {
+        return null;
     }
 }
