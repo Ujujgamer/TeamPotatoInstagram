@@ -20,7 +20,6 @@ public class AuthorizeActivity extends OAuthActivity{
 
     @Override
     public void setLayoutView() {
-
     }
 
     @Override
