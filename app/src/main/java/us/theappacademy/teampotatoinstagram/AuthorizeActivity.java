@@ -1,6 +1,7 @@
 package us.theappacademy.teampotatoinstagram;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import us.theappacademy.oauth.OAuthParameters;
@@ -24,7 +25,19 @@ public class AuthorizeActivity extends OAuthActivity{
 
     @Override
     public void replaceCurrentFragment(Fragment newFragment, boolean addToStack) {
+        //handles all the fragments; get ready for change of fragments
+        FragmentTransaction fragmentTransaction= getFragmentManager().beginTransaction();
 
+        //contain and replace any fragments
+        fragmentTransaction.replace(R.id.fragmentContainer, new Fragment());
+
+        //dictate onto hit back button and go be to previous screens
+        if(addToStack){
+            fragmentTransaction.addToBackStack(null);
+        }
+
+        //perform action
+        fragmentTransaction.commit();
     }
 
     //contain multiple fragments for the activity
