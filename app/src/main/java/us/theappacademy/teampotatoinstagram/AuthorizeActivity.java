@@ -20,6 +20,8 @@ public class AuthorizeActivity extends OAuthActivity{
 
     @Override
     public void setLayoutView() {
+        //replace current fragments, use other fragment
+        replaceCurrentFragment(new ProfileFragment(), false);
     }
 
     @Override
