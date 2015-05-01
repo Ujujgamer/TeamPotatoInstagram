@@ -25,29 +25,26 @@ public class ProfileFragment extends OAuthFragment{
     //occur when wanting to send something to Instagram
     public void onTaskFinished(String responseString) {
         //check what the response is
-        JSONObject jsonObject= JsonBuilder.jsonObjectFromString(responseString);
-        setJsonObject(jsonObject);
-        try {
-            profileName.setText(getJsonObject().getJSONObject("data").getString("full_name"));
-            profileUsername.setText(getJsonObject().getJSONObject("data").getString("username"));
-
-        }
-        catch(JSONException error){
-            Log.e("Profile Fragment", "JSONException: "+ error);
-        }
+        profileName.setText(responseString);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //create an OAuthParameter
         OAuthParameters oauthParameters= new OAuthParameters();
+
+        //add a parameter
         oauthParameters.addParameter("access_token", getOAuthConnection().accessToken);
 
+        //build a url
         String url= UrlBuilder.buildUrlWithParameters(getOAuthConnection().getApiUrl()+ "/users/self",oauthParameters);
 
+        //set url for an api call
         setUrlForApiCall(url);
 
+        //get a request for task
         new GetRequestTask().execute(this);
     }
 
