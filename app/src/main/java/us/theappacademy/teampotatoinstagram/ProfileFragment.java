@@ -25,7 +25,17 @@ public class ProfileFragment extends OAuthFragment{
     //occur when wanting to send something to Instagram
     public void onTaskFinished(String responseString) {
         //check what the response is
-        profileName.setText(responseString);
+        //build JSONObjects and set
+            JSONObject jsonObject= JsonBuilder.jsonObjectFromString(responseString);
+            setJsonObject(jsonObject);
+        //gather all information within JSONObject and display
+            try {
+                profileName.setText(getJsonObject().getJSONObject("data").getString("full_name"));
+                profileUsername.setText(getJsonObject().getJSONObject("data").getString("username"));
+            }
+            catch(JSONException error){
+                Log.e("Profile Fragment", "JSONException: "+ error);
+            }
     }
 
     @Override
