@@ -1,36 +1,64 @@
 package us.theappacademy.teampotatoinstagram;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
+import us.theappacademy.oauth.OAuthParameters;
+import us.theappacademy.oauth.util.UrlBuilder;
+import us.theappacademy.oauth.view.AuthorizeFragment;
+import us.theappacademy.oauth.view.OAuthActivity;
 
-public class AuthorizeActivity extends Activity {
+public class AuthorizeActivity extends OAuthActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //create an Instagram Connection
+        oauthConnection= new InstagramConnection();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authorize);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.authorize, menu);
-        return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    public void setLayoutView() {
+        //replace current fragments, use other fragment
+        replaceCurrentFragment(new ProfileFragment(), false);
+    }
+
+    @Override
+    public void replaceCurrentFragment(Fragment newFragment, boolean addToStack) {
+        //handles all the fragments; get ready for change of fragments
+        FragmentTransaction fragmentTransaction= getFragmentManager().beginTransaction();
+
+        //contain and replace any fragments
+        fragmentTransaction.replace(R.id.fragmentContainer, new Fragment());
+
+        //dictate onto hit back button and go be to previous screens
+        if(addToStack){
+            fragmentTransaction.addToBackStack(null);
         }
-        return super.onOptionsItemSelected(item);
+
+        //perform action
+        fragmentTransaction.commit();
+    }
+
+    //contain multiple fragments for the activity
+    @Override
+    protected Fragment createFragment() {
+        //provide a way to log in to Instagram on app
+        AuthorizeFragment authorizeFragment= new AuthorizeFragment();
+
+        //in order to make connection to API, check its parameter
+        OAuthParameters oAuthParameters= new OAuthParameters();
+        oAuthParameters.addParameter("client_id", oauthConnection.getClientID());
+        oAuthParameters.addParameter("redirect_uri", oauthConnection.getRedirectUrl());
+        oAuthParameters.addParameter("response_type", "code");
+        oAuthParameters.addParameter("state", UrlBuilder.generateUniqueState(16));
+
+        //check the state and store
+        oauthConnection.state= oAuthParameters.getValueFromParameter("state");
+
+        //get storage from legit user
+        authorizeFragment.setOAuthParameters(oAuthParameters);
+        return authorizeFragment;
     }
 }
