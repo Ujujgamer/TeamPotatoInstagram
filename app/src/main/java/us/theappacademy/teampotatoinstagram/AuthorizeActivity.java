@@ -30,7 +30,7 @@ public class AuthorizeActivity extends OAuthActivity{
         FragmentTransaction fragmentTransaction= getFragmentManager().beginTransaction();
 
         //contain and replace any fragments
-        fragmentTransaction.replace(R.id.fragmentContainer, new Fragment());
+        fragmentTransaction.replace(R.id.fragmentContainer, newFragment);
 
         //dictate onto hit back button and go be to previous screens
         if(addToStack){
