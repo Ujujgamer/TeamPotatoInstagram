@@ -35,22 +35,24 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile Name"
-        android:id="@+id/profileName"
+        android:text="User Name"
+        android:textSize="50px"
+        android:id="@+id/profileUsername"
         android:gravity="center"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
+    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Name"
-        android:id="@+id/profileUsername"
+        android:text="Profile Name"
+        android:id="@+id/profileName"
         android:gravity="center"
-        android:layout_below="@+id/profileName"
+        android:layout_below="@+id/profileUsername"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
 
     <TextView
         android:layout_width="match_parent"
@@ -70,20 +72,29 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <SearchView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/searchView"
-        android:layout_alignTop="@+id/editText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center_horizontal" />
+        android:width="230px"
+        android:text="Battle!!!"
+        android:id="@+id/button"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50px"
+        android:gravity="center"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:width="230px"
         android:text="Randomize"
-        android:id="@+id/button"
+        android:id="@+id/button2"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true" />
 
