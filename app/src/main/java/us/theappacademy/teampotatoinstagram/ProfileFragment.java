@@ -49,7 +49,7 @@ public class ProfileFragment extends OAuthFragment{
         oauthParameters.addParameter("access_token", getOAuthConnection().accessToken);
 
         //build a url
-        String url= UrlBuilder.buildUrlWithParameters(getOAuthConnection().getApiUrl()+ "/users/self",oauthParameters);
+        String url= UrlBuilder.buildUrlWithParameters(getOAuthConnection().getApiUrl()+ "users/self",oauthParameters);
 
         //set url for an api call
         setUrlForApiCall(url);
