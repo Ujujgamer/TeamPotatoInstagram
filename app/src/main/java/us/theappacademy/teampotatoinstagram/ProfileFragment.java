@@ -1,11 +1,11 @@
 package us.theappacademy.teampotatoinstagram;
 
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -20,6 +20,8 @@ import us.theappacademy.oauth.view.OAuthFragment;
 public class ProfileFragment extends OAuthFragment{
     private TextView profileName;
     private TextView profileUsername;
+    private TextView editText;
+    private Button button;
 
     @Override
     //occur when wanting to send something to Instagram
@@ -68,6 +70,19 @@ public class ProfileFragment extends OAuthFragment{
 
         //get ids within XML layout and save in variable; profileUsername
         profileUsername= (TextView)fragmentView.findViewById(R.id.profileUsername);
+
+        //get ids within XML layout and save in variable; editText
+        editText= (TextView)fragmentView.findViewById(R.id.editText);
+
+        //get ids within XML layout and save in variable; button
+        button= (Button)fragmentView.findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getParentActivity().replaceCurrentFragment(new PictureFragment(), true);
+            }
+        });
 
         return fragmentView;
     }
