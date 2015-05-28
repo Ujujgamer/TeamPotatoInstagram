@@ -74,13 +74,22 @@ public class ProfileFragment extends OAuthFragment{
         //get ids within XML layout and save in variable; editText
         editText= (TextView)fragmentView.findViewById(R.id.editText);
 
+        if(getJsonObject() != null) {
+            try {
+                profileName.setText(getJsonObject().getJSONObject("data").getString("full_name"));
+                profileUsername.setText(getJsonObject().getJSONObject("data").getString("username"));
+            }
+            catch(JSONException error){
+                Log.e("Profile Fragment", "JSONException: "+ error);
+            }
+        }
         //get ids within XML layout and save in variable; button
         button= (Button)fragmentView.findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getParentActivity().replaceCurrentFragment(new PictureFragment(), true);
+                getParentActivity().replaceCurrentFragment(PictureFragment.newInstance(editText.getText().toString()), true);
             }
         });
 
